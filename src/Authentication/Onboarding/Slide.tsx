@@ -1,7 +1,8 @@
-import { Dimensions, StyleSheet, Text, View, ViewStyle } from "react-native";
+import type { ViewStyle } from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 
 export interface SlideProps {
-  label: string;
+  title: string;
   right?: boolean;
 }
 const { width, height } = Dimensions.get("window");
@@ -22,17 +23,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-export const Slide: React.FC<SlideProps> = ({ label, right = false }) => {
-  const transform:ViewStyle["transform"] = [
+export const Slide: React.FC<SlideProps> = ({ title, right = false }) => {
+  const transform: ViewStyle["transform"] = [
     { translateY: (SLIDE_HEIGHT - 100) / 2 },
-    { translateX: right ? width/2 -50 : -width/2 + 50 },
+    { translateX: right ? width / 2 - 50 : -width / 2 + 50 },
     { rotate: right ? "-90deg" : "90deg" },
   ];
 
   return (
     <View style={styles.container}>
       <View style={[styles.titleContainer, { transform }]}>
-        <Text style={styles.title}>{label}</Text>
+        <Text selectable style={styles.title}>
+          {title}
+        </Text>
       </View>
     </View>
   );
