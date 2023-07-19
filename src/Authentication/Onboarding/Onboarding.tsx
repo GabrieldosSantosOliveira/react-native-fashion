@@ -21,7 +21,11 @@ const slides = [
     description:
       "Confused about your outfit? Don't worry! Find the best outfit here!",
     color: "#BFEAF5",
-    picture: require("./assets/1.png"),
+    picture: {
+      src: require("./assets/1.png"),
+      width: 2513,
+      height: 3583,
+    },
   },
   {
     title: "Playful",
@@ -29,7 +33,7 @@ const slides = [
     description:
       "Hating the clothes in your wardrobe? Explore hundreds of outfits ideas",
     color: "#BEECC4",
-    picture: require("./assets/2.png"),
+    picture: { src: require("./assets/2.png"), width: 2793, height: 3744 },
   },
   {
     title: "Excentric",
@@ -37,7 +41,7 @@ const slides = [
     description:
       "Create your individual & unique style and look amazing everyday",
     color: "#FFE4D9",
-    picture: require("./assets/3.png"),
+    picture: { src: require("./assets/3.png"), width: 2738, height: 3244 },
   },
   {
     title: "Funky",
@@ -45,7 +49,7 @@ const slides = [
     description:
       "Discover the latest trends in fashion and explore your personality",
     color: "#FFDDDD",
-    picture: require("./assets/4.png"),
+    picture: { src: require("./assets/4.png"), width: 1757, height: 2551 },
   },
 ];
 export const Onboarding = () => {

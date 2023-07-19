@@ -1,4 +1,4 @@
-import type { ViewStyle } from "react-native";
+import type { ImageRequireSource, ViewStyle } from "react-native";
 import { Dimensions, StyleSheet, View, Image } from "react-native";
 
 import { Text } from "../../components/Theme";
@@ -6,7 +6,11 @@ import { Text } from "../../components/Theme";
 export interface SlideProps {
   title: string;
   right?: boolean;
-  picture: number;
+  picture: {
+    src: ImageRequireSource;
+    width: number;
+    height: number;
+  };
 }
 const { width, height } = Dimensions.get("window");
 export const SLIDE_HEIGHT = 0.61 * height;
@@ -26,10 +30,16 @@ export const Slide: React.FC<SlideProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.underlay}>
-        <Image source={picture} style={styles.picture} />
+        <Image
+          source={picture.src}
+          style={{
+            width: width - BORDER_RADIUS,
+            height: ((width - BORDER_RADIUS) * picture.height) / picture.width,
+          }}
+        />
       </View>
       <View style={[styles.titleContainer, { transform }]}>
-        <Text variant="title1">{title}</Text>
+        <Text variant="hero">{title}</Text>
       </View>
     </View>
   );
@@ -45,12 +55,6 @@ const styles = StyleSheet.create({
   underlay: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: "flex-end",
-  },
-  picture: {
-    ...StyleSheet.absoluteFillObject,
-    top: BORDER_RADIUS,
-    width: undefined,
-    height: undefined,
-    borderBottomRightRadius: BORDER_RADIUS,
+    alignItems: "center",
   },
 });

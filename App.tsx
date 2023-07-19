@@ -4,11 +4,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useFonts } from "expo-font";
 import { ActivityIndicator, View } from "react-native";
 import { ThemeProvider } from "@shopify/restyle";
+import React from "react";
 
 import { Onboarding } from "./src/Authentication/Onboarding";
 import { Welcome } from "./src/Authentication/Welcome/Welcome";
 import { theme } from "./src/components/Theme";
-import React from "react";
 const AuthenticationStack = createStackNavigator();
 const AuthenticationNavigator = () => {
   return (
@@ -21,9 +21,10 @@ const AuthenticationNavigator = () => {
 
 export default function App() {
   const [isFontsLoaded] = useFonts({
-    "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
-    "SFProText-Semibold": require("./assets/fonts/SF-Pro-Text-Semibold.otf"),
-    "SFProText-Regular": require("./assets/fonts/SF-Pro-Text-Regular.otf"),
+    "SFProDisplay-Bold": require("./assets/fonts/SF-Pro-Display-Bold.otf"),
+    "SFProDisplay-Regular": require("./assets/fonts/SF-Pro-Display-Regular.otf"),
+    "SFProDisplay-SemiBold": require("./assets/fonts/SF-Pro-Display-Semibold.otf"),
+    "SFProDisplay-Medium": require("./assets/fonts/SF-Pro-Display-Medium.otf"),
   });
   if (!isFontsLoaded) {
     return (
