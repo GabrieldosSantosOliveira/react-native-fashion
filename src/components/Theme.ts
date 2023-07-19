@@ -1,4 +1,4 @@
-import { createText, createTheme } from "@shopify/restyle";
+import { createBox, createText, createTheme } from "@shopify/restyle";
 
 export const palette = {
   primary: "#2CB9B0",
@@ -20,6 +20,12 @@ export const theme = createTheme({
     s: 8,
     m: 16,
     l: 24,
+    xl: 40,
+  },
+  borderRadii: {
+    s: 4,
+    m: 10,
+    l: 25,
     xl: 40,
   },
   textVariants: {
@@ -56,4 +62,5 @@ export const theme = createTheme({
   },
 });
 export const Text = createText<Theme>();
+export const Box = createBox<Theme>();
 export type Theme = typeof theme;

@@ -12,6 +12,7 @@ import Animated, {
 import { Dot } from "./Dot";
 import { SubSlide } from "./SubSlide";
 import { Slide, SLIDE_HEIGHT, BORDER_RADIUS } from "./Slide";
+import { Picture } from "./Picture";
 const { width } = Dimensions.get("window");
 
 const slides = [
@@ -74,6 +75,9 @@ export const Onboarding = () => {
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.slider, backgroundColor]}>
+        {slides.map(({ picture }, index) => (
+          <Picture index={index} picture={picture} x={x} key={index} />
+        ))}
         <Animated.ScrollView
           ref={scrollRef}
           horizontal
@@ -83,13 +87,8 @@ export const Onboarding = () => {
           bounces={false}
           onScroll={scrollHandler}
         >
-          {slides.map(({ title, picture }, index) => (
-            <Slide
-              key={index}
-              right={!!(index % 2)}
-              title={title}
-              picture={picture}
-            />
+          {slides.map(({ title }, index) => (
+            <Slide key={index} right={!!(index % 2)} title={title} />
           ))}
         </Animated.ScrollView>
       </Animated.View>
