@@ -3,13 +3,18 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useFonts } from "expo-font";
 import { ActivityIndicator, View } from "react-native";
+import { ThemeProvider } from "@shopify/restyle";
 
 import { Onboarding } from "./src/Authentication/Onboarding";
+import { Welcome } from "./src/Authentication/Welcome/Welcome";
+import { theme } from "./src/components/Theme";
+import React from "react";
 const AuthenticationStack = createStackNavigator();
 const AuthenticationNavigator = () => {
   return (
     <AuthenticationStack.Navigator screenOptions={{ headerShown: false }}>
       <AuthenticationStack.Screen name="Onboarding" component={Onboarding} />
+      <AuthenticationStack.Screen name="Welcome" component={Welcome} />
     </AuthenticationStack.Navigator>
   );
 };
@@ -28,8 +33,10 @@ export default function App() {
     );
   }
   return (
-    <NavigationContainer>
-      <AuthenticationNavigator />
-    </NavigationContainer>
+    <ThemeProvider theme={theme}>
+      <NavigationContainer>
+        <AuthenticationNavigator />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }

@@ -5,11 +5,13 @@ import Animated, {
   useAnimatedRef,
   useAnimatedScrollHandler,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
 } from "react-native-reanimated";
 
+import { Dot } from "./Dot";
 import { SubSlide } from "./SubSlide";
-import { Slide, SLIDE_HEIGHT } from "./Slide";
+import { Slide, SLIDE_HEIGHT, BORDER_RADIUS } from "./Slide";
 const { width } = Dimensions.get("window");
 
 const slides = [
@@ -19,6 +21,7 @@ const slides = [
     description:
       "Confused about your outfit? Don't worry! Find the best outfit here!",
     color: "#BFEAF5",
+    picture: require("./assets/1.png"),
   },
   {
     title: "Playful",
@@ -26,6 +29,7 @@ const slides = [
     description:
       "Hating the clothes in your wardrobe? Explore hundreds of outfits ideas",
     color: "#BEECC4",
+    picture: require("./assets/2.png"),
   },
   {
     title: "Excentric",
@@ -33,6 +37,7 @@ const slides = [
     description:
       "Create your individual & unique style and look amazing everyday",
     color: "#FFE4D9",
+    picture: require("./assets/3.png"),
   },
   {
     title: "Funky",
@@ -40,6 +45,7 @@ const slides = [
     description:
       "Discover the latest trends in fashion and explore your personality",
     color: "#FFDDDD",
+    picture: require("./assets/4.png"),
   },
 ];
 export const Onboarding = () => {
@@ -60,6 +66,7 @@ export const Onboarding = () => {
   const footerStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: -x.value }],
   }));
+  const currentIndex = useDerivedValue(() => x.value / width);
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.slider, backgroundColor]}>
@@ -72,18 +79,28 @@ export const Onboarding = () => {
           bounces={false}
           onScroll={scrollHandler}
         >
-          {slides.map(({ title }, index) => {
-            return <Slide key={index} right={!!(index % 2)} title={title} />;
-          })}
+          {slides.map(({ title, picture }, index) => (
+            <Slide
+              key={index}
+              right={!!(index % 2)}
+              title={title}
+              picture={picture}
+            />
+          ))}
         </Animated.ScrollView>
       </Animated.View>
       <View style={styles.footer}>
-        <Animated.View style={[StyleSheet.absoluteFillObject, backgroundColor]}>
+        <Animated.View style={[StyleSheet.absoluteFill, backgroundColor]} />
+        <View style={styles.footerContent}>
+          <View style={styles.pagination}>
+            {slides.map((_, index) => (
+              <Dot key={index} currentIndex={currentIndex} index={index} />
+            ))}
+          </View>
           <Animated.View
             style={[
-              styles.footerContent,
-              { width: width * slides.length },
               footerStyle,
+              { flex: 1, flexDirection: "row", width: width * slides.length },
             ]}
           >
             {slides.map(({ description, subTitle }, index) => (
@@ -101,12 +118,11 @@ export const Onboarding = () => {
               />
             ))}
           </Animated.View>
-        </Animated.View>
+        </View>
       </View>
     </View>
   );
 };
-const BORDER_RADIUS = 75;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -123,6 +139,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     borderTopLeftRadius: BORDER_RADIUS,
+  },
+  pagination: {
+    ...StyleSheet.absoluteFillObject,
+    height: BORDER_RADIUS,
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
