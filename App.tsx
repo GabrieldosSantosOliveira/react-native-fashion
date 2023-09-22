@@ -1,23 +1,13 @@
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import { useFonts } from "expo-font";
 import { ActivityIndicator, View } from "react-native";
 import { ThemeProvider } from "@shopify/restyle";
 import React from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { Onboarding } from "./src/Authentication/Onboarding";
-import { Welcome } from "./src/Authentication/Welcome/Welcome";
 import { theme } from "./src/components/Theme";
-const AuthenticationStack = createStackNavigator();
-const AuthenticationNavigator = () => {
-  return (
-    <AuthenticationStack.Navigator screenOptions={{ headerShown: false }}>
-      <AuthenticationStack.Screen name="Onboarding" component={Onboarding} />
-      <AuthenticationStack.Screen name="Welcome" component={Welcome} />
-    </AuthenticationStack.Navigator>
-  );
-};
+import { AuthenticationNavigator } from "./src/Authentication";
 
 export default function App() {
   const [isFontsLoaded] = useFonts({
@@ -36,7 +26,9 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-        <AuthenticationNavigator />
+        <SafeAreaProvider>
+          <AuthenticationNavigator />
+        </SafeAreaProvider>
       </NavigationContainer>
     </ThemeProvider>
   );

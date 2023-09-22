@@ -1,4 +1,4 @@
-import { createBox, createText, createTheme } from "@shopify/restyle";
+import { createBox, createText, createTheme, spacing } from "@shopify/restyle";
 
 export const palette = {
   primary: "#2CB9B0",
@@ -11,10 +11,12 @@ export const palette = {
 export const theme = createTheme({
   colors: {
     primary: palette.primary,
-    title: palette.title,
+    secondary: palette.title,
     text: palette.body,
     white: palette.white,
     grey: palette.grey,
+    darkGrey: "#8a8d90",
+    danger: "#FF0058",
   },
   spacing: {
     s: 8,
@@ -26,7 +28,7 @@ export const theme = createTheme({
     s: 4,
     m: 10,
     l: 25,
-    xl: 40,
+    xl: 75,
   },
   textVariants: {
     hero: {
@@ -39,13 +41,13 @@ export const theme = createTheme({
     title1: {
       fontSize: 28,
       fontFamily: "SFProDisplay-SemiBold",
-      color: "title",
+      color: "secondary",
     },
     title2: {
       fontSize: 24,
       lineHeight: 30,
       fontFamily: "SFProDisplay-SemiBold",
-      color: "title",
+      color: "secondary",
     },
     body: {
       fontSize: 16,

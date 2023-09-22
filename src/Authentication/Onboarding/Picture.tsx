@@ -6,7 +6,8 @@ import Animated, {
   useAnimatedStyle,
 } from "react-native-reanimated";
 
-import { BORDER_RADIUS } from "./Slide";
+import { theme } from "../../components/Theme";
+
 export interface PictureProps {
   picture: {
     src: ImageRequireSource;
@@ -33,8 +34,9 @@ export const Picture: React.FC<PictureProps> = ({ picture, x, index }) => {
       <Image
         source={picture.src}
         style={{
-          width: width - BORDER_RADIUS,
-          height: ((width - BORDER_RADIUS) * picture.height) / picture.width,
+          width: width - theme.borderRadii.xl,
+          height:
+            ((width - theme.borderRadii.xl) * picture.height) / picture.width,
         }}
       />
     </Animated.View>
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: "flex-end",
     alignItems: "center",
-    borderBottomRightRadius: BORDER_RADIUS,
+    borderBottomRightRadius: theme.borderRadii.xl,
     overflow: "hidden",
   },
 });

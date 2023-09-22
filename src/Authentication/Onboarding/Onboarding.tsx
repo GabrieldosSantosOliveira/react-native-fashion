@@ -9,9 +9,12 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 
+import { theme } from "../../components/Theme";
+import type { Routes, StackNavigationProps } from "../../components/Navigation";
+
 import { Dot } from "./Dot";
 import { SubSlide } from "./SubSlide";
-import { Slide, SLIDE_HEIGHT, BORDER_RADIUS } from "./Slide";
+import { Slide, SLIDE_HEIGHT } from "./Slide";
 import { Picture } from "./Picture";
 const { width } = Dimensions.get("window");
 
@@ -53,7 +56,9 @@ const slides = [
     picture: { src: require("./assets/4.png"), width: 1757, height: 2551 },
   },
 ];
-export const Onboarding = () => {
+export const Onboarding: React.FC<
+  StackNavigationProps<Routes, "Onboarding">
+> = ({ navigation }) => {
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const x = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler({
@@ -106,20 +111,27 @@ export const Onboarding = () => {
               { flex: 1, flexDirection: "row", width: width * slides.length },
             ]}
           >
-            {slides.map(({ description, subTitle }, index) => (
-              <SubSlide
-                onPress={() => {
-                  scrollRef.current?.scrollTo({
-                    x: width * (index + 1),
-                    animated: true,
-                  });
-                }}
-                key={index}
-                last={index === slides.length - 1}
-                subTitle={subTitle}
-                description={description}
-              />
-            ))}
+            {slides.map(({ description, subTitle }, index) => {
+              const last = index === slides.length - 1;
+              return (
+                <SubSlide
+                  onPress={() => {
+                    if (last) {
+                      navigation.navigate("Welcome");
+                    } else {
+                      scrollRef.current?.scrollTo({
+                        x: width * (index + 1),
+                        animated: true,
+                      });
+                    }
+                  }}
+                  key={index}
+                  last={last}
+                  subTitle={subTitle}
+                  description={description}
+                />
+              );
+            })}
           </Animated.View>
         </View>
       </View>
@@ -133,7 +145,7 @@ const styles = StyleSheet.create({
   },
   slider: {
     height: SLIDE_HEIGHT,
-    borderBottomRightRadius: BORDER_RADIUS,
+    borderBottomRightRadius: theme.borderRadii.xl,
   },
   footer: {
     flex: 1,
@@ -141,11 +153,11 @@ const styles = StyleSheet.create({
   footerContent: {
     flex: 1,
     backgroundColor: "white",
-    borderTopLeftRadius: BORDER_RADIUS,
+    borderTopLeftRadius: theme.borderRadii.xl,
   },
   pagination: {
     ...StyleSheet.absoluteFillObject,
-    height: BORDER_RADIUS,
+    height: theme.borderRadii.xl,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
