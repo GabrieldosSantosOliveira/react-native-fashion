@@ -1,8 +1,11 @@
 import { Dimensions, Image } from "react-native";
+import { useTheme } from "@shopify/restyle";
 
-import { Box, Text, theme } from "../../components/Theme";
+import type { Theme } from "../../components/Theme";
+import { Box, Text } from "../../components/Theme";
 import { Button } from "../../components/Button";
 import type { Routes, StackNavigationProps } from "../../components/Navigation";
+
 const { width } = Dimensions.get("window");
 const picture = {
   src: require("./../assets/5.png"),
@@ -12,6 +15,7 @@ const picture = {
 export const Welcome = ({
   navigation,
 }: StackNavigationProps<Routes, "Welcome">) => {
+  const { borderRadii } = useTheme<Theme>();
   return (
     <Box flex={1} backgroundColor="white">
       <Box
@@ -24,9 +28,8 @@ export const Welcome = ({
         <Image
           source={picture.src}
           style={{
-            width: width - theme.borderRadii.xl,
-            height:
-              ((width - theme.borderRadii.xl) * picture.height) / picture.width,
+            width: width - borderRadii.xl,
+            height: ((width - borderRadii.xl) * picture.height) / picture.width,
           }}
         />
       </Box>

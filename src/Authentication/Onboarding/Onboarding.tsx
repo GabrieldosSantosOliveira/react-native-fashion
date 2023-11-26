@@ -8,14 +8,16 @@ import Animated, {
   useDerivedValue,
   useSharedValue,
 } from "react-native-reanimated";
+import { useTheme } from "@shopify/restyle";
 
-import { theme } from "../../components/Theme";
+import { makeStyles, type Theme } from "../../components/Theme";
 import type { Routes, StackNavigationProps } from "../../components/Navigation";
 
 import { Dot } from "./Dot";
 import { SubSlide } from "./SubSlide";
 import { Slide, SLIDE_HEIGHT } from "./Slide";
 import { Picture } from "./Picture";
+
 const { width } = Dimensions.get("window");
 
 const slides = [
@@ -59,6 +61,9 @@ const slides = [
 export const Onboarding: React.FC<
   StackNavigationProps<Routes, "Onboarding">
 > = ({ navigation }) => {
+  const styles = useStyles();
+
+  const theme = useTheme<Theme>();
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const x = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler({
@@ -138,7 +143,8 @@ export const Onboarding: React.FC<
     </View>
   );
 };
-const styles = StyleSheet.create({
+
+const useStyles = makeStyles((theme) => ({
   container: {
     flex: 1,
     backgroundColor: "white",
@@ -162,4 +168,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-});
+}));

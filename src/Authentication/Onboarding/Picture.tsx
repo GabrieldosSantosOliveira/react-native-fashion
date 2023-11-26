@@ -5,8 +5,10 @@ import Animated, {
   interpolate,
   useAnimatedStyle,
 } from "react-native-reanimated";
+import { useTheme } from "@shopify/restyle";
 
-import { theme } from "../../components/Theme";
+import type { Theme } from "../../components/Theme";
+import { makeStyles } from "../../components/Theme";
 
 export interface PictureProps {
   picture: {
@@ -19,6 +21,8 @@ export interface PictureProps {
 }
 const { width } = Dimensions.get("window");
 export const Picture: React.FC<PictureProps> = ({ picture, x, index }) => {
+  const styles = useStyles();
+  const theme = useTheme<Theme>();
   const opacity = useAnimatedStyle(() => {
     return {
       opacity: interpolate(
@@ -29,6 +33,7 @@ export const Picture: React.FC<PictureProps> = ({ picture, x, index }) => {
       ),
     };
   });
+
   return (
     <Animated.View style={[styles.underlay, opacity]}>
       <Image
@@ -42,7 +47,7 @@ export const Picture: React.FC<PictureProps> = ({ picture, x, index }) => {
     </Animated.View>
   );
 };
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme) => ({
   underlay: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: "flex-end",
@@ -50,4 +55,4 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: theme.borderRadii.xl,
     overflow: "hidden",
   },
-});
+}));

@@ -1,7 +1,10 @@
 import { Dimensions, Image, StatusBar, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTheme } from "@shopify/restyle";
 
-import { Box, theme } from "./Theme";
+import type { Theme } from "./Theme";
+import { Box } from "./Theme";
+
 const { width } = Dimensions.get("window");
 const aspectRatio = 750 / 1125;
 const height = width * aspectRatio;
@@ -12,6 +15,7 @@ export interface ContainerProps {
 export const assets = [require("./assets/patterns/1.png")];
 export const Container: React.FC<ContainerProps> = ({ children, footer }) => {
   const insets = useSafeAreaInsets();
+  const { borderRadii } = useTheme<Theme>();
   return (
     <Box flex={1} backgroundColor="secondary">
       <StatusBar barStyle="light-content" />
@@ -26,7 +30,7 @@ export const Container: React.FC<ContainerProps> = ({ children, footer }) => {
             style={{
               width,
               height,
-              borderBottomLeftRadius: theme.borderRadii.xl,
+              borderBottomLeftRadius: borderRadii.xl,
             }}
           />
         </Box>
@@ -38,7 +42,7 @@ export const Container: React.FC<ContainerProps> = ({ children, footer }) => {
             ...StyleSheet.absoluteFillObject,
             width,
             height,
-            borderBottomLeftRadius: theme.borderRadii.xl,
+            borderBottomLeftRadius: borderRadii.xl,
             top: -height * 0.61,
           }}
         />
