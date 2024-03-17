@@ -14,13 +14,13 @@ export const Dot: React.FC<DotProps> = ({ index, currentIndex }) => {
       currentIndex.value,
       [index - 1, index, index + 1],
       [1, 1.25, 1],
-      Extrapolate.CLAMP
+      Extrapolate.CLAMP,
     );
     const opacity = interpolate(
       currentIndex.value,
       [index - 1, index, index + 1],
       [0.5, 1, 0.5],
-      Extrapolate.CLAMP
+      Extrapolate.CLAMP,
     );
     return {
       width: 8,

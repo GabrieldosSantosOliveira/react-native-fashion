@@ -29,7 +29,7 @@ export const Picture: React.FC<PictureProps> = ({ picture, x, index }) => {
         x.value,
         [(index - 0.5) * width, width * index, (index + 0.5) * width],
         [0, 1, 0],
-        Extrapolate.CLAMP
+        Extrapolate.CLAMP,
       ),
     };
   });

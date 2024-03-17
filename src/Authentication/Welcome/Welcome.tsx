@@ -12,9 +12,9 @@ const picture = {
   width: 3383,
   height: 5074,
 };
-export const Welcome = ({
+export const Welcome: React.FC<StackNavigationProps<Routes, "Welcome">> = ({
   navigation,
-}: StackNavigationProps<Routes, "Welcome">) => {
+}) => {
   const { borderRadii } = useTheme<Theme>();
   return (
     <Box flex={1} backgroundColor="white">
@@ -57,7 +57,9 @@ export const Welcome = ({
           <Button
             variant="primary"
             label="Have an account? Login"
-            onPress={() => navigation.navigate("Login")}
+            onPress={() => {
+              navigation.navigate("Login");
+            }}
           />
           <Button variant="default" label="Join us, it's free" />
           <Button variant="transparent" label="Forgot password?" />

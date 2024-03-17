@@ -9,7 +9,7 @@ import { SocialLogin } from "../components/SocialLogin";
 import { Button } from "../../components/Button";
 import { TextInput } from "../components/Form/TextInput";
 import { CheckBox } from "../components/Form/CheckBox";
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <>
       <SocialLogin />
@@ -22,7 +22,7 @@ const Footer = () => {
         >
           <Box flexDirection="row" justifyContent="center">
             <Text variant="button" color="white">
-              Don't have an account?
+              Don&#39;t have an account?
             </Text>
             <Text marginLeft="s" variant="button" color="primary">
               Sing Up here
@@ -42,10 +42,7 @@ const LoginSchema = yup.object().shape({
   email: yup.string().email("Invalid Email").required("Required"),
 });
 
-const passwordValidator = (password: string) => {
-  return password.length >= 6;
-};
-export const Login = () => {
+export const Login: React.FC = () => {
   return (
     <Container footer={<Footer />}>
       <Box padding="l">
@@ -58,7 +55,9 @@ export const Login = () => {
         <Formik
           validationSchema={LoginSchema}
           initialValues={{ email: "", password: "", remember: false }}
-          onSubmit={(value) => console.log(values)}
+          onSubmit={(value) => {
+            console.log(value);
+          }}
         >
           {({
             handleChange,
@@ -86,7 +85,9 @@ export const Login = () => {
                 <CheckBox
                   label="Remember me"
                   checked={values.remember}
-                  onChange={() => setFieldValue("remember", !values.remember)}
+                  onChange={() => async () =>
+                    await setFieldValue("remember", !values.remember)
+                  }
                 />
                 <Button variant="transparent" onPress={() => {}}>
                   <Text color="primary">Forgot Password</Text>

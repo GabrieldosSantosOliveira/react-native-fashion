@@ -75,7 +75,7 @@ export const Onboarding: React.FC<
     backgroundColor: interpolateColor(
       x.value,
       slides.map((_, index) => index * width),
-      slides.map(({ color }) => color)
+      slides.map(({ color }) => color),
     ),
   }));
   const footerStyle = useAnimatedStyle(() => ({

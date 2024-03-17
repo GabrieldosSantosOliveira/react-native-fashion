@@ -31,9 +31,7 @@ export const Button: React.FC<ButtonProps> = ({
       onPress={onPress}
       style={[styles.container, { backgroundColor }]}
     >
-      {children ? (
-        children
-      ) : (
+      {children ?? (
         <Text variant="button" style={{ color }}>
           {label}
         </Text>
