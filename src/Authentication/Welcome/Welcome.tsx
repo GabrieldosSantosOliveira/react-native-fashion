@@ -50,7 +50,7 @@ export const Welcome: React.FC<StackNavigationProps<Routes, "Welcome">> = ({
           alignItems="center"
           padding="xl"
         >
-          <Text variant="title2">Let's get started</Text>
+          <Text variant="title2">{"Let's get started"}</Text>
           <Text variant="body" textAlign="center">
             Login to your account below or singup for an amazing experience
           </Text>

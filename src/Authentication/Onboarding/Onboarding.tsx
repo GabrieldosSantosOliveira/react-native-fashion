@@ -8,9 +8,8 @@ import Animated, {
   useDerivedValue,
   useSharedValue,
 } from "react-native-reanimated";
-import { useTheme } from "@shopify/restyle";
 
-import { makeStyles, type Theme } from "../../components/Theme";
+import { makeStyles } from "../../components/Theme";
 import type { Routes, StackNavigationProps } from "../../components/Navigation";
 
 import { Dot } from "./Dot";
@@ -63,7 +62,6 @@ export const Onboarding: React.FC<
 > = ({ navigation }) => {
   const styles = useStyles();
 
-  const theme = useTheme<Theme>();
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const x = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler({

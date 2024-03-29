@@ -72,31 +72,34 @@ export const Login: React.FC<StackNavigationProps<Routes, "Login">> = ({
               onSubmitEditing={() => password.current?.focus()}
             />
           </Box>
-          <Box marginBottom="m">
-            <TextInput
-              ref={password}
-              onChangeText={handleChange("password")}
-              onBlur={handleBlur("password")}
-              icon="lock"
-              placeholder="Enter your password"
-              error={errors.password}
-              touched={touched.password}
-              secureTextEntry
-              autoComplete="password"
-              returnKeyType="go"
-              returnKeyLabel="go"
-              onSubmitEditing={() => handleSubmit()}
-            />
-          </Box>
-          <Box flexDirection="row" justifyContent="space-between">
+          <TextInput
+            ref={password}
+            onChangeText={handleChange("password")}
+            onBlur={handleBlur("password")}
+            icon="lock"
+            placeholder="Enter your password"
+            error={errors.password}
+            touched={touched.password}
+            secureTextEntry
+            autoComplete="password"
+            returnKeyType="go"
+            returnKeyLabel="go"
+            onSubmitEditing={() => handleSubmit()}
+          />
+          <Box
+            flexDirection="row"
+            marginVertical="s"
+            justifyContent="space-between"
+          >
             <CheckBox
               label="Remember me"
               checked={values.remember}
-              onChange={() => async () =>
-                await setFieldValue("remember", !values.remember)
-              }
+              onChange={() => setFieldValue("remember", !values.remember)}
             />
-            <Button variant="transparent" onPress={() => {}}>
+            <Button
+              variant="transparent"
+              onPress={() => navigation.navigate("ForgotPassword")}
+            >
               <Text color="primary">Forgot Password</Text>
             </Button>
           </Box>

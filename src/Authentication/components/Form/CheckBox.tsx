@@ -6,7 +6,7 @@ import { Box, Text } from "../../../components/Theme";
 export interface CheckBoxProps {
   label: string;
   checked: boolean;
-  onChange: (pointerInside: boolean) => void;
+  onChange: () => void;
 }
 export const CheckBox: React.FC<CheckBoxProps> = ({
   label,
@@ -14,8 +14,8 @@ export const CheckBox: React.FC<CheckBoxProps> = ({
   checked,
 }) => {
   return (
-    <RectButton onPress={onChange}>
-      <Box flexDirection="row" alignItems="center">
+    <RectButton onPress={() => onChange()} style={{ justifyContent: "center" }}>
+      <Box flexDirection="row">
         <Box
           marginRight="m"
           width={20}

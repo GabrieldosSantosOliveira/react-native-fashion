@@ -28,26 +28,20 @@ export const SignUp: React.FC<StackNavigationProps<Routes, "SignUp">> = ({
 }) => {
   const passwordConfirmationRef = useRef<RNTextInput>(null);
   const password = useRef<RNTextInput>(null);
-  const {
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    values,
-    setFieldValue,
-    errors,
-    touched,
-  } = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-      passwordConfirmation: "",
-      remember: false,
+  const { handleChange, handleBlur, handleSubmit, errors, touched } = useFormik(
+    {
+      initialValues: {
+        email: "",
+        password: "",
+        passwordConfirmation: "",
+        remember: false,
+      },
+      validationSchema: SignUpSchema,
+      onSubmit: (value) => {
+        console.log(value);
+      },
     },
-    validationSchema: SignUpSchema,
-    onSubmit: (value) => {
-      console.log(value);
-    },
-  });
+  );
   return (
     <Container
       footer={
@@ -63,7 +57,7 @@ export const SignUp: React.FC<StackNavigationProps<Routes, "SignUp">> = ({
           Create your account
         </Text>
         <Text variant="body" textAlign="center" marginBottom="l">
-          Let'us know what your name, email, and your password
+          {"Let'us know what your name, email, and your password"}
         </Text>
         <Box>
           <Box marginBottom="m">
