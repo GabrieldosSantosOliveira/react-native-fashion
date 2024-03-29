@@ -1,7 +1,7 @@
 import type { TextInputProps as RNTextInputProps } from "react-native";
 import { TextInput as RNTextInput, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import React from "react";
+import React, { forwardRef } from "react";
 import { useTheme } from "@shopify/restyle";
 
 import type { Theme } from "../../../components/Theme";
@@ -22,15 +22,12 @@ const getColor = (touched?: boolean, error?: string): keyof Theme["colors"] => {
     return "primary";
   }
 };
-export const TextInput: React.FC<TextInputProps> = ({
-  icon,
-  placeholder,
-  touched,
-  error,
-  ...props
-}) => {
+export const TextInputBase: React.ForwardRefRenderFunction<
+  RNTextInput,
+  TextInputProps
+> = ({ icon, placeholder, touched, error, ...props }, ref) => {
   const theme = useTheme<Theme>();
-  const SIZE = theme.borderRadii.m * 2;
+  const SIZE = theme.borderRadii.m * 2.5;
 
   const reColor: keyof Theme["colors"] = getColor(touched, error);
   const color = theme.colors[reColor];
@@ -49,6 +46,7 @@ export const TextInput: React.FC<TextInputProps> = ({
       </Box>
       <Box flex={1}>
         <RNTextInput
+          ref={ref}
           underlineColorAndroid="transparent"
           placeholder={placeholder}
           placeholderTextColor={color}
@@ -62,11 +60,18 @@ export const TextInput: React.FC<TextInputProps> = ({
           width={SIZE}
           justifyContent="center"
           alignItems="center"
-          backgroundColor={error ? "primary" : "danger"}
+          backgroundColor={error ? "danger" : "primary"}
+          style={{ borderRadius: SIZE / 2 }}
         >
-          <Feather name={true ? "check" : "x"} color="white" size={16} />
+          <Feather
+            name={error ? "x" : "check"}
+            color="white"
+            size={16}
+            style={{ textAlign: "center" }}
+          />
         </Box>
       )}
     </Box>
   );
 };
+export const TextInput = forwardRef(TextInputBase);

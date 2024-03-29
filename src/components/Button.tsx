@@ -6,7 +6,7 @@ import { Text, theme, type Theme } from "./Theme";
 export interface ButtonProps {
   variant?: "primary" | "default" | "transparent";
   label?: string;
-  onPress: () => void;
+  onPress?: () => void;
   children?: React.ReactNode;
 }
 const getBackgroundColor = ({ variant }: Pick<ButtonProps, "variant">) => {

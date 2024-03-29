@@ -4,6 +4,7 @@ import { useTheme } from "@shopify/restyle";
 
 import type { Theme } from "./Theme";
 import { Box } from "./Theme";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const { width } = Dimensions.get("window");
 const aspectRatio = 750 / 1125;
@@ -52,7 +53,7 @@ export const Container: React.FC<ContainerProps> = ({ children, footer }) => {
           backgroundColor="white"
           style={{ borderTopLeftRadius: 0 }}
         >
-          {children}
+          <KeyboardAwareScrollView>{children}</KeyboardAwareScrollView>
         </Box>
       </Box>
       <Box backgroundColor="secondary" paddingTop="m">

@@ -1,9 +1,10 @@
 import type { ImageRequireSource } from "react-native";
 import { Dimensions, Image, StyleSheet } from "react-native";
 import Animated, {
-  Extrapolate,
+  Extrapolation,
   interpolate,
   useAnimatedStyle,
+  SharedValue,
 } from "react-native-reanimated";
 import { useTheme } from "@shopify/restyle";
 
@@ -16,7 +17,7 @@ export interface PictureProps {
     width: number;
     height: number;
   };
-  x: Animated.SharedValue<number>;
+  x: SharedValue<number>;
   index: number;
 }
 const { width } = Dimensions.get("window");
@@ -29,7 +30,7 @@ export const Picture: React.FC<PictureProps> = ({ picture, x, index }) => {
         x.value,
         [(index - 0.5) * width, width * index, (index + 0.5) * width],
         [0, 1, 0],
-        Extrapolate.CLAMP,
+        Extrapolation.CLAMP,
       ),
     };
   });
