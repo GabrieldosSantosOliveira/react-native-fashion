@@ -23,6 +23,7 @@ export const theme = createTheme({
     grey: palette.grey,
     darkGrey: "#8a8d90",
     danger: "#FF0058",
+    primaryLight: "#E7F9F7",
   },
   spacing: {
     s: 8,

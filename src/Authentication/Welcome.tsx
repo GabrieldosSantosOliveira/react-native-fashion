@@ -1,14 +1,14 @@
 import { Dimensions, Image } from "react-native";
 import { useTheme } from "@shopify/restyle";
 
-import type { Theme } from "../../components/Theme";
-import { Box, Text } from "../../components/Theme";
-import { Button } from "../../components/Button";
-import type { Routes, StackNavigationProps } from "../../components/Navigation";
+import type { Theme } from "../components/Theme";
+import { Box, Text } from "../components/Theme";
+import { Button } from "../components/Button";
+import type { Routes, StackNavigationProps } from "../components/Navigation";
 
 const { width } = Dimensions.get("window");
 const picture = {
-  src: require("./../assets/5.png"),
+  src: require("./assets/5.png"),
   width: 3383,
   height: 5074,
 };

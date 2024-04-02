@@ -13,13 +13,22 @@ const height = width * aspectRatio;
 export interface ContainerProps {
   children: React.ReactNode;
   footer: React.ReactNode;
+  pattern: 0 | 1 | 2;
 }
 
-export const assets = [require("./assets/patterns/1.png")];
-export const Container: React.FC<ContainerProps> = ({ children, footer }) => {
+export const assets = [
+  require("./assets/patterns/1.png"),
+  require("./assets/patterns/2.png"),
+  require("./assets/patterns/3.png"),
+] as const;
+export const Container: React.FC<ContainerProps> = ({
+  children,
+  footer,
+  pattern,
+}) => {
   const insets = useSafeAreaInsets();
   const { borderRadii } = useTheme<Theme>();
-
+  const asset = assets[pattern];
   return (
     <KeyboardAwareScrollView scrollEnabled={false}>
       <Box
@@ -37,7 +46,7 @@ export const Container: React.FC<ContainerProps> = ({ children, footer }) => {
             height={height * 0.61}
           >
             <Image
-              source={assets[0]}
+              source={asset}
               style={{
                 width,
                 height,
@@ -48,7 +57,7 @@ export const Container: React.FC<ContainerProps> = ({ children, footer }) => {
         </Box>
         <Box flex={1} overflow="hidden">
           <Image
-            source={assets[0]}
+            source={asset}
             style={{
               ...StyleSheet.absoluteFillObject,
               width,

@@ -41,6 +41,7 @@ export const Login: React.FC<StackNavigationProps<Routes, "Login">> = ({
   const password = useRef<RNTextInput>(null);
   return (
     <Container
+      pattern={0}
       footer={
         <Footer
           title="Don't have an account?"
