@@ -8,7 +8,11 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { theme } from "./src/components/Theme";
 import { AuthenticationNavigator } from "./src/Authentication";
+import { createStackNavigator } from "@react-navigation/stack";
+import { HomeNavigator } from "./src/Home";
+import { AppRoutes } from "./src/components/Navigation";
 
+const AppStack = createStackNavigator<AppRoutes>();
 export default function App() {
   const [isFontsLoaded] = useFonts({
     "SFProDisplay-Bold": require("./assets/fonts/SF-Pro-Display-Bold.otf"),
@@ -27,7 +31,13 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <SafeAreaProvider>
-          <AuthenticationNavigator />
+          <AppStack.Navigator screenOptions={{ headerShown: false }}>
+            <AppStack.Screen
+              name="Authentication"
+              component={AuthenticationNavigator}
+            />
+            <AppStack.Screen name="Home" component={HomeNavigator} />
+          </AppStack.Navigator>
         </SafeAreaProvider>
       </NavigationContainer>
     </ThemeProvider>

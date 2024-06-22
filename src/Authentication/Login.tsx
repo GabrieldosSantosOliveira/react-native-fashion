@@ -5,11 +5,18 @@ import * as yup from "yup";
 import { Container } from "./../components/Container";
 import { Box, Text } from "./../components/Theme";
 import { Button } from "./../components/Button";
-import { TextInput } from "./components/Form/TextInput";
-import { CheckBox } from "./components/Form/CheckBox";
+import { TextInput } from "../components/Form/TextInput";
+import { CheckBox } from "../components/Form/CheckBox";
 import { Footer } from "./components/Footer";
 import { TextInput as RNTextInput } from "react-native";
-import { Routes, StackNavigationProps } from "../components/Navigation";
+import {
+  AuthenticationRoutes,
+  HomeRoutes,
+  StackNavigationProps,
+} from "../components/Navigation";
+import { BorderlessButton } from "react-native-gesture-handler";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { DrawerScreenProps } from "@react-navigation/drawer";
 
 const LoginSchema = yup.object().shape({
   password: yup
@@ -20,9 +27,12 @@ const LoginSchema = yup.object().shape({
   email: yup.string().email("Invalid Email").required("Required"),
 });
 
-export const Login: React.FC<StackNavigationProps<Routes, "Login">> = ({
-  navigation,
-}) => {
+export const Login: React.FC<
+  CompositeScreenProps<
+    StackNavigationProps<AuthenticationRoutes, "Login">,
+    DrawerScreenProps<HomeRoutes>
+  >
+> = ({ navigation }) => {
   const {
     handleChange,
     handleBlur,
@@ -34,9 +44,7 @@ export const Login: React.FC<StackNavigationProps<Routes, "Login">> = ({
   } = useFormik({
     initialValues: { email: "", password: "", remember: false },
     validationSchema: LoginSchema,
-    onSubmit: (value) => {
-      console.log(value);
-    },
+    onSubmit: () => navigation.navigate("OutfitIdeas"),
   });
   const password = useRef<RNTextInput>(null);
   return (
@@ -97,12 +105,13 @@ export const Login: React.FC<StackNavigationProps<Routes, "Login">> = ({
               checked={values.remember}
               onChange={() => setFieldValue("remember", !values.remember)}
             />
-            <Button
-              variant="transparent"
+            <BorderlessButton
               onPress={() => navigation.navigate("ForgotPassword")}
             >
-              <Text color="primary">Forgot Password</Text>
-            </Button>
+              <Text variant="button" color="primary">
+                Forgot Password
+              </Text>
+            </BorderlessButton>
           </Box>
           <Box alignItems="center" marginTop="m">
             <Button

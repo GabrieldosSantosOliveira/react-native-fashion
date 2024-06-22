@@ -4,7 +4,11 @@ import { useTheme } from "@shopify/restyle";
 import type { Theme } from "../components/Theme";
 import { Box, Text } from "../components/Theme";
 import { Button } from "../components/Button";
-import type { Routes, StackNavigationProps } from "../components/Navigation";
+import type {
+  AuthenticationRoutes,
+  StackNavigationProps,
+} from "../components/Navigation";
+import { BorderlessButton } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("window");
 const picture = {
@@ -12,9 +16,10 @@ const picture = {
   width: 3383,
   height: 5074,
 };
-export const Welcome: React.FC<StackNavigationProps<Routes, "Welcome">> = ({
-  navigation,
-}) => {
+
+export const Welcome: React.FC<
+  StackNavigationProps<AuthenticationRoutes, "Welcome">
+> = ({ navigation }) => {
   const { borderRadii } = useTheme<Theme>();
   return (
     <Box flex={1} backgroundColor="white">
@@ -62,7 +67,13 @@ export const Welcome: React.FC<StackNavigationProps<Routes, "Welcome">> = ({
             }}
           />
           <Button variant="default" label="Join us, it's free" />
-          <Button variant="transparent" label="Forgot password?" />
+          <BorderlessButton
+            onPress={() => navigation.navigate("ForgotPassword")}
+          >
+            <Text variant="button" color="secondary">
+              Forgot password?
+            </Text>
+          </BorderlessButton>
         </Box>
       </Box>
     </Box>

@@ -5,10 +5,13 @@ import * as yup from "yup";
 import { Container } from "./../components/Container";
 import { Box, Text } from "./../components/Theme";
 import { Button } from "./../components/Button";
-import { TextInput } from "./components/Form/TextInput";
+import { TextInput } from "../components/Form/TextInput";
 import { Footer } from "./components/Footer";
 import { TextInput as RNTextInput } from "react-native";
-import { Routes, StackNavigationProps } from "../components/Navigation";
+import {
+  AuthenticationRoutes,
+  StackNavigationProps,
+} from "../components/Navigation";
 
 const SignUpSchema = yup.object().shape({
   password: yup
@@ -23,9 +26,9 @@ const SignUpSchema = yup.object().shape({
     .equals([yup.ref("password")], "Passwords don't match"),
 });
 
-export const SignUp: React.FC<StackNavigationProps<Routes, "SignUp">> = ({
-  navigation,
-}) => {
+export const SignUp: React.FC<
+  StackNavigationProps<AuthenticationRoutes, "SignUp">
+> = ({ navigation }) => {
   const passwordConfirmationRef = useRef<RNTextInput>(null);
   const password = useRef<RNTextInput>(null);
   const { handleChange, handleBlur, handleSubmit, errors, touched } = useFormik(

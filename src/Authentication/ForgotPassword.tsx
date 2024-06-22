@@ -2,18 +2,21 @@ import React from "react";
 import { Container } from "../components/Container";
 import { Footer } from "./components/Footer";
 import { Box, Text } from "../components/Theme";
-import { Routes, StackNavigationProps } from "../components/Navigation";
+import {
+  AuthenticationRoutes,
+  StackNavigationProps,
+} from "../components/Navigation";
 import { Linking } from "react-native";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Button } from "../components/Button";
-import { TextInput } from "./components/Form/TextInput";
+import { TextInput } from "../components/Form/TextInput";
 const ForgotPasswordSchema = yup.object().shape({
   email: yup.string().email("Invalid Email").required("Required"),
 });
 
 export const ForgotPassword: React.FC<
-  StackNavigationProps<Routes, "ForgotPassword">
+  StackNavigationProps<AuthenticationRoutes, "ForgotPassword">
 > = ({ navigation }) => {
   const { handleChange, handleBlur, handleSubmit, errors, touched } = useFormik(
     {
@@ -38,7 +41,10 @@ export const ForgotPassword: React.FC<
           Forgot Password
         </Text>
         <Text variant="body" textAlign="center" marginBottom="l">
-          Enter the email address associated with your account
+          Your password was successfully changed
+        </Text>
+        <Text variant="body" textAlign="center" marginBottom="l">
+          Close this window and login again
         </Text>
         <Box>
           <Box marginBottom="m">

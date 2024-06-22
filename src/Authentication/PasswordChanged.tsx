@@ -1,35 +1,39 @@
-import { Feather } from "@expo/vector-icons";
 import { Container } from "../components/Container";
-import { Routes, StackNavigationProps } from "../components/Navigation";
+import {
+  AuthenticationRoutes,
+  StackNavigationProps,
+} from "../components/Navigation";
 import { Box, Text } from "../components/Theme";
 import { Button } from "../components/Button";
-import { CloseButton } from "../components/CloseButton";
+import { RoundedIconButton } from "../components/RoundedIconButton";
+import { RoundedIcon } from "../components/RoundedIcon";
 const SIZE = 80;
 export const PasswordChanged: React.FC<
-  StackNavigationProps<Routes, "PasswordChanged">
+  StackNavigationProps<AuthenticationRoutes, "PasswordChanged">
 > = ({ navigation }) => {
   return (
     <Container
       pattern={0}
       footer={
         <Box flexDirection="row" justifyContent="center">
-          <CloseButton onPress={() => navigation.pop()} />
+          <RoundedIconButton
+            name="x"
+            size={60}
+            backgroundColor="white"
+            color="secondary"
+            onPress={() => navigation.pop()}
+          />
         </Box>
       }
     >
-      <Box flex={1} justifyContent="center" alignItems="center">
-        <Box
+      <Box flex={1} justifyContent="center" alignItems="center" padding="xl">
+        <RoundedIcon
+          name="check"
+          size={SIZE}
           backgroundColor="primaryLight"
-          justifyContent="center"
-          alignItems="center"
-          style={{ height: SIZE, width: SIZE, borderRadius: SIZE / 2 }}
-          marginBottom="xl"
-        >
-          <Text color="primary" textAlign="center">
-            <Feather name="check" size={32} />
-          </Text>
-        </Box>
-        <Text variant="title1" textAlign="center" marginBottom="l">
+          color="primary"
+        />
+        <Text variant="title1" textAlign="center" marginVertical="l">
           Forgot Password
         </Text>
         <Text variant="body" textAlign="center" marginBottom="l">

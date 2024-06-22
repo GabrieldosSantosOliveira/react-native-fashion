@@ -4,8 +4,9 @@ import { Feather } from "@expo/vector-icons";
 import React, { forwardRef } from "react";
 import { useTheme } from "@shopify/restyle";
 
-import type { Theme } from "../../../components/Theme";
-import { Box } from "../../../components/Theme";
+import type { Theme } from "../Theme";
+import { Box } from "../Theme";
+import { RoundedIcon } from "../RoundedIcon";
 
 export interface TextInputProps extends RNTextInputProps {
   placeholder: string;
@@ -54,22 +55,12 @@ export const TextInputBase: React.ForwardRefRenderFunction<
         />
       </Box>
       {touched && (
-        <Box
-          borderRadius="m"
-          height={SIZE}
-          width={SIZE}
-          justifyContent="center"
-          alignItems="center"
-          backgroundColor={error ? "danger" : "primary"}
-          style={{ borderRadius: SIZE / 2 }}
-        >
-          <Feather
-            name={error ? "x" : "check"}
-            color="white"
-            size={16}
-            style={{ textAlign: "center" }}
-          />
-        </Box>
+        <RoundedIcon
+          color="white"
+          size={SIZE}
+          backgroundColor={!error ? "primary" : "danger"}
+          name={error ? "x" : "check"}
+        />
       )}
     </Box>
   );
